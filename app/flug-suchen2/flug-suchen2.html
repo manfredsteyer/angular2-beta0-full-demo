@@ -1,0 +1,60 @@
+<h1>Flug suchen!</h1>
+
+<form [ngFormModel]="filter">
+	<div class="form-group">
+		<label>Von</label>
+		<input ngControl="von" class="form-control">
+
+		<div *ngIf="!filter.controls.von.valid">
+			Fehler!!!
+		</div>
+
+		<div *ngIf="filter.controls.von.hasError('required')">
+			Pflichtfeld!!!
+		</div>
+
+		<div *ngIf="filter.controls.von.hasError('ort')">
+			Ort!!!
+		</div>
+
+		<div *ngIf="filter.controls.von.hasError('minlength')">
+			Zu kurz!!!
+		</div>
+
+	</div>
+
+	<div class="form-group">
+		<label>Nach</label>
+		<input ngControl="nach" class="form-control">
+	</div>
+
+	<div class="form-group">
+		<input type="button"
+				class="btn btn-default"
+				value="Suchen!"
+				[disabled]="!filter.valid"
+				(click)="suchen()">
+	</div>
+</form>
+<table class="table table-striped" *ngIf="fluege.length > 0">
+
+	<tr>
+		<th>Id</th>
+		<th>Datum</th>
+		<th>Von</th>
+		<th>Nach</th>
+		<th>Aktionen</th>
+	</tr>
+
+	<tr *ngFor='#f of fluege' [class.active]='f == selectedFlug' >
+		<td>{{f.id}}</td>
+		<td>{{f.datum.substr(0,10) }}</td>
+		<td>{{f.abflugort | ort:'short' }}</td>
+		<td>{{f.zielort | ort:'long'}}</td>
+		<td>
+			<a href="javascript:void(0)"
+				(click)="selectFlug(f)">Auswählen</a>
+		</td>
+	</tr>
+
+</table>
