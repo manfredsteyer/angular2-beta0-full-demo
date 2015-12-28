@@ -1,0 +1,23 @@
+<style>
+    /*
+    li>a.router-link-active {
+        background-color: navy;
+        color: white;
+    }
+    */
+</style>
+<div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked" style="margin-top:20px;">
+        <li [class.active]="isActive('/flug-buchen/flug-suchen')"><a [routerLink]="['./FlugSuchen']">Flug auswählen</a></li>
+        <li [class.active]="isActive('/flug-buchen/passagier-suchen')"><a [routerLink]="['./PassagierSuchen']">Passagier auswählen</a></li>
+        <li [class.active]="isActive('/flug-buchen/buchen')"><a [routerLink]="['./Buchen']">Buchen</a></li>            
+    </ul>
+</div>
+
+<div class="col-sm-9">
+
+    <router-outlet></router-outlet>
+</div>
+
+<hr>
+

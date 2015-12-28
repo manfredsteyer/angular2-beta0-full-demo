@@ -8,17 +8,17 @@ import { ROUTER_DIRECTIVES, RouteConfig, ROUTER_PROVIDERS, CanActivate } from 'a
 import { Location, HashLocationStrategy, LocationStrategy } from 'angular2/router';
 import { Home } from './home/home';
 import { FlugEdit } from './flug-edit/flug-edit';
+import { FlugBuchen } from './flug-buchen/flug-buchen';
+import { Warenkorb} from './warenkorb/warenkorb';
 
 @Component({
 	selector: 'app',
-	directives: [ROUTER_DIRECTIVES],
+	directives: [ROUTER_DIRECTIVES, Warenkorb],
 	templateUrl: 'app/app.html'
 })
 @RouteConfig([
-	{ path: '/', component: Home, as: 'Home' },
-	{ path: '/flug-suchen', component: FlugSuchen, as: 'FlugSuchen' },
-	{ path: '/flug-edit/:id', component: FlugEdit, as: 'FlugEdit' }
-
+	{ path: '/', component: Home, as: 'Home', useAsDefault: true },
+    { path: '/flug-buchen/...', component: FlugBuchen, as: 'FlugBuchen' }
 ])
 @CanActivate((next, prev) => {
     return true;     
@@ -33,7 +33,9 @@ export class App {
 	}
 	
 	isActive(path): boolean {
-		return (this.location.path() == path);
+        
+        if (path == '') return this.location.path() == '';  
+		return (this.location.path().startsWith(path));
 	}
 }
 

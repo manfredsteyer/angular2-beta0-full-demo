@@ -1,9 +1,8 @@
-import { Inject} from 'angular2/core';
+import { Inject, Injectable} from 'angular2/core';
 import { BASE_URL } from '../registry';
 import { Http, URLSearchParams, Headers } from 'angular2/http';
 
-declare function fetch(url:string): any;
-
+@Injectable()
 export class FlugService {
 	
 	private baseUrl: string;
@@ -37,19 +36,8 @@ export class FlugService {
 				.http
 				.post(url, JSON.stringify(flug), {headers:headers } );
 	}
-	
+    
 	find(von, nach) {
-		
-		/*
-		var url = this.baseUrl + "/flug"
-				+ "?abflugOrt=" 
-				+ encodeURIComponent(von) 
-				+ "&zielOrt=" 
-				+ encodeURIComponent(nach);
-	
-		return fetch(url)
-			      .then((r) => r.json());
-		*/
 		
 		var url = this.baseUrl + "/flug";
 		

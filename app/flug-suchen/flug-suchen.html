@@ -25,7 +25,7 @@
 </form>
 
 
-<table class="table table-striped" *ngIf="fluege.length > 0">
+<table class="table table-striped" *ngIf="flugManager.fluege.length > 0">
 
 	<tr>
 		<th>Id</th>
@@ -35,7 +35,7 @@
 		<th>Aktionen</th>
 	</tr>
 
-	<tr *ngFor='#f of fluege' class="active" [class.active]='f == selectedFlug' >
+	<tr *ngFor='#f of flugManager.fluege' class="active" [class.active]='f == flugManager.selectedFlug' >
 		<td>{{f.id}}</td>
 		<td>{{f.datum.substr(0,10) }}</td>
 		<td>{{f.abflugort | ort:'short' }}</td>
@@ -44,7 +44,7 @@
 			<a href="javascript:void(0)"
 				(click)="selectFlug(f)">Auswählen</a> |
 			<a href="javascript:void(0)"
-				[routerLink]="['/FlugEdit', {id: f.id}]">Editieren</a>
+				[routerLink]="['../FlugEdit', {id: f.id}]">Editieren</a>
 		</td>
 	</tr>
 </table>

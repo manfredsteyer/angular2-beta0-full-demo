@@ -1,0 +1,26 @@
+
+<div class="panel panel-default">
+
+  <div class="panel-heading">Ihr Warenkorb</div>
+
+  <ul class="list-group">
+      
+    <li class="list-group-item" *ngIf="fluege.length == 0">
+        Ihr Warenkorb ist leer.
+    </li>
+      
+    <li class="list-group-item" *ngFor="#f of fluege">
+        <p>
+            {{f.abflugort}} - {{f.zielort}}
+        </p>
+        <p>
+            {{f.datum.substr(0,10)}}
+        </p>        
+        <p>
+            <button type="button" class="btn btn-default" (click)="remove(f)">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </p>        
+    </li>
+  </ul>
+</div>

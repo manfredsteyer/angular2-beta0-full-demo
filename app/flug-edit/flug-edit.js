@@ -8,8 +8,8 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, flug_service_1, common_1, date_control_1;
-    var FlugEdit;
+    var core_1, router_1, flug_service_1, common_1, date_control_1, router_2;
+    var mayCurrentUserAccessProtectedRoute, FlugEdit;
     return {
         setters:[
             function (core_1_1) {
@@ -17,6 +17,7 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+                router_2 = router_1_1;
             },
             function (flug_service_1_1) {
                 flug_service_1 = flug_service_1_1;
@@ -28,19 +29,32 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
                 date_control_1 = date_control_1_1;
             }],
         execute: function() {
+            mayCurrentUserAccessProtectedRoute = true;
             FlugEdit = (function () {
                 function FlugEdit(params, flugService) {
                     this.info = "FlugEdit!";
                     this.flug = {};
                     this.id = params.get('id');
-                    var that = this;
-                    flugService
-                        .findById(this.id)
-                        .subscribe(function (f) {
-                        that.flug = f;
-                    });
                     this.flugService = flugService;
                 }
+                FlugEdit.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.flugService
+                        .findById(this.id)
+                        .subscribe(function (f) {
+                        _this.flug = f;
+                    });
+                };
+                FlugEdit.prototype.routerCanDeactivate = function (nextInstruction, prevInstruction) {
+                    console.debug("routerCanDeactivate");
+                    return confirm("Verlassen?");
+                };
+                FlugEdit.prototype.routerOnActivate = function (nextInstruction, prevInstruction) {
+                    console.debug("routerOnActivate");
+                };
+                FlugEdit.prototype.routerOnDeactivate = function (nextInstruction, prevInstruction) {
+                    console.debug("routerOnDeactivate");
+                };
                 FlugEdit.prototype.save = function () {
                     var _this = this;
                     this
@@ -61,6 +75,10 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
                     core_1.Component({
                         templateUrl: 'app/flug-edit/flug-edit.html',
                         directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, date_control_1.DateControl]
+                    }),
+                    router_2.CanActivate(function (next, prev) {
+                        console.debug('CanActivate');
+                        return mayCurrentUserAccessProtectedRoute;
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, flug_service_1.FlugService])
                 ], FlugEdit);

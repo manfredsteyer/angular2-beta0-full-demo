@@ -48,16 +48,6 @@ System.register(['angular2/core', '../registry', 'angular2/http'], function(expo
                         .post(url, JSON.stringify(flug), { headers: headers });
                 };
                 FlugService.prototype.find = function (von, nach) {
-                    /*
-                    var url = this.baseUrl + "/flug"
-                            + "?abflugOrt="
-                            + encodeURIComponent(von)
-                            + "&zielOrt="
-                            + encodeURIComponent(nach);
-                
-                    return fetch(url)
-                              .then((r) => r.json());
-                    */
                     var url = this.baseUrl + "/flug";
                     var params = new http_1.URLSearchParams();
                     params.append('abflugOrt', von);
@@ -68,6 +58,7 @@ System.register(['angular2/core', '../registry', 'angular2/http'], function(expo
                         .map(function (r) { return r.json(); });
                 };
                 FlugService = __decorate([
+                    core_1.Injectable(),
                     __param(0, core_1.Inject(registry_1.BASE_URL)), 
                     __metadata('design:paramtypes', [String, http_1.Http])
                 ], FlugService);

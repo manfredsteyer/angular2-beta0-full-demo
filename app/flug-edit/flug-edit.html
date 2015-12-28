@@ -1,5 +1,6 @@
 <h1>{{info}}</h1>
 
+<form #f="ngForm">
 <div *ngIf="message" class="alert alert-info">
 	{{message}}
 </div>
@@ -30,3 +31,4 @@
 	<input type="button" value="Speichern"
 			class="btn" (click)="save()">
 </div>
+</form>

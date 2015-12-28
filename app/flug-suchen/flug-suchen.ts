@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, ChangeDetectionStrategy } from 'angular2/core';
 import { NgIf, NgFor, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
 import { OrtPipe } from '../pipes/ort-pipe';
 import { FlugService } from '../services/flug-service';
@@ -7,7 +7,13 @@ import { OrtValidator } from '../validators/ort-validator';
 import { ShowError } from '../validators/show-error';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { FlugCard } from '../flug-card/flug-card';
+import {FlugManager} from '../services/flug-manager';
 import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/subject/BehaviorSubject';
+//import { ReplySubject } from 'rxjs/subject/ReplySubject';
+
+import {FlugEventService} from '../services/flug-event-service';
+import {AfterContentChecked } from 'angular2/core';
 
 @Component({ 
 	selector: 'flug-suchen',
@@ -19,25 +25,36 @@ export class FlugSuchen {
 	
 	von: string = "Graz";
 	nach: string = "Hamburg";
-	fluege = [];
-	selectedFlug;
-	flugService: FlugService;
-	
-	constructor(flugService: FlugService) {
-		this.flugService = flugService;
+	// fluege: BehaviorSubject<any>;
+	// selectedFlug;
+	//flugService: FlugService;
+	flugManager: FlugManager;
+    flugEventService: FlugEventService;
+    message: string;
+    
+	constructor(flugManager: FlugManager, flugEventService: FlugEventService) {
+		//this.flugService = flugService;
+        this.flugManager = flugManager;
+        this.flugEventService = flugEventService;
 	}
-	
+    
 	suchen(f) {
 		
-		this.flugService
-			.find(this.von, this.nach)
-			.subscribe((r) => {
-				this.fluege = r;
-			});
+		this.flugManager
+			.load(this.von, this.nach)
+            .subscribe(
+                () => { 
+                    this.message = "Flüge geladen!";
+                }, 
+                (err) => {
+                    console.error(err);
+                    this.message = "Fehler beim Laden von Flügen!";
+                });
 	}
 	
 	selectFlug(flug) {
-		this.selectedFlug = flug;
+		this.flugManager.selectedFlug = flug;
+        this.flugEventService.flugSelected.next(flug);
 	}
 	
 }
