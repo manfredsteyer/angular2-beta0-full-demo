@@ -6,15 +6,9 @@ import { DateControl } from '../date-control/date-control';
 
 import { CanActivate, CanDeactivate, OnActivate, OnDeactivate, ComponentInstruction } from 'angular2/router';
 
-var mayCurrentUserAccessProtectedRoute = true;
-
 @Component({
 	templateUrl: 'app/flug-edit/flug-edit.html',
-	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, DateControl]
-})
-@CanActivate((next, prev) => {
-    console.debug('CanActivate');
-    return mayCurrentUserAccessProtectedRoute;
+	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES /*, DateControl*/]
 })
 export class FlugEdit implements CanDeactivate, OnActivate, OnDeactivate, OnInit {
 	

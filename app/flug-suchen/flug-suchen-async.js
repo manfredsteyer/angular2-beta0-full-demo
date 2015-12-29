@@ -66,7 +66,7 @@ System.register(['angular2/core', 'angular2/common', '../validators/ort-validato
                 FlugSuchen = __decorate([
                     core_1.Component({
                         selector: 'flug-suchen',
-                        templateUrl: 'app/flug-suchen/flug-suchen.html',
+                        templateUrl: 'app/flug-suchen/flug-suchen-async.html',
                         directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, ort_validator_1.OrtValidator, show_error_1.ShowError, router_1.ROUTER_DIRECTIVES, flug_card_1.FlugCard],
                         pipes: []
                     }), 
@@ -78,4 +78,4 @@ System.register(['angular2/core', 'angular2/common', '../validators/ort-validato
         }
     }
 });
-//# sourceMappingURL=flug-suchen.js.map
+//# sourceMappingURL=flug-suchen-async.js.map

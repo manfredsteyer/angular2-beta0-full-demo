@@ -1,4 +1,4 @@
-System.register(['./flug-service', 'angular2/core', 'rxjs/subject/BehaviorSubject'], function(exports_1) {
+System.register(['./flug-service', 'angular2/core', 'rxjs/subject/BehaviorSubject', 'rxjs/scheduler/asap'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['./flug-service', 'angular2/core', 'rxjs/subject/BehaviorSubjec
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var flug_service_1, core_1, BehaviorSubject_1;
+    var flug_service_1, core_1, BehaviorSubject_1, asap_1;
     var FlugManager;
     return {
         setters:[
@@ -20,20 +20,27 @@ System.register(['./flug-service', 'angular2/core', 'rxjs/subject/BehaviorSubjec
             },
             function (BehaviorSubject_1_1) {
                 BehaviorSubject_1 = BehaviorSubject_1_1;
+            },
+            function (asap_1_1) {
+                asap_1 = asap_1_1;
             }],
         execute: function() {
             FlugManager = (function () {
                 function FlugManager(flugService) {
-                    this.fluegeEvents = new BehaviorSubject_1.BehaviorSubject([]);
                     this.fluege = [];
                     this.flugService = flugService;
+                    // events
+                    var subj = new BehaviorSubject_1.BehaviorSubject([]);
+                    this.fluegeSubscriber = subj;
+                    this.fluegeStream = subj.subscribeOn(asap_1.asap);
                 }
                 FlugManager.prototype.load = function (von, nach) {
                     var _this = this;
                     var o = this.flugService.find(von, nach).share();
                     o.subscribe(function (loadedFluege) {
-                        _this.fluegeEvents.next(loadedFluege);
                         _this.fluege = loadedFluege;
+                        // events
+                        _this.fluegeSubscriber.next(loadedFluege);
                     });
                     return o;
                 };

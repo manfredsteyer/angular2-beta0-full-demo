@@ -16,11 +16,19 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/publish';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/subscribeOn';
 import 'rxjs/add/observable/from';
 
-import {Injector} from 'angular2/core';
 
+import {Injector} from 'angular2/core';
 import {FlugManager} from './services/flug-manager';
+
+import {OrtPipe} from './pipes/ort-pipe';
+import {DateControl} from './date-control/date-control';
+import {PLATFORM_DIRECTIVES, PLATFORM_PIPES} from 'angular2/core';
+
+import {OAuthService} from './oauth2/oauth-service';
+import {Configuration} from './services/configuration';
 
 var services = [
 	provide(FlugService, { useClass: FlugService }),
@@ -29,8 +37,12 @@ var services = [
 	HTTP_PROVIDERS,
 	FORM_PROVIDERS,
 	ROUTER_PROVIDERS,
+    OAuthService,
+    Configuration,
 	// provide(LocationStrategy, {useClass: HashLocationStrategy}),
-	Location
+	Location,
+    provide(PLATFORM_DIRECTIVES, {useValue: DateControl, multi: true}),
+    provide(PLATFORM_PIPES, {useValue: OrtPipe, multi: true})
 ];
 
 bootstrap(App, services);

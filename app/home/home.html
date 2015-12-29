@@ -1,4 +1,31 @@
-<h1>Willkommen</h1>
-<div>
-	{{ info }}
+
+<h1 *ngIf="name == null">Willkommen</h1>
+<h1 *ngIf="name != null">Willkommen, {{name}}</h1>
+
+<p *ngIf="message">
+    {{message}}
+</p>
+    
+<p>
+    {{ info }}
+</p>
+
+<div *ngIf="!isLoggedIn">
+    <h2>Anmelden</h2>
+    <p>
+        Melden Sie sich, um die geschützten Bereiche zu nutzen.       
+    </p>    
+    <p>
+        <input type="button" class="btn" value="Login!" (click)="login()">
+    </p>
+</div>
+
+<div *ngIf="isLoggedIn">
+    <h2>Abmelden</h2>
+    <p>
+        Melden Sie sich hier ab.       
+    </p>    
+    <p>
+        <input type="button" class="btn" value="Logoff!" (click)="logoff()">
+    </p>
 </div>

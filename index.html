@@ -17,16 +17,29 @@
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
 
+
+
     <!-- 2. Configure SystemJS -->
     <script>
       System.config({
-        // format: 'register',
-        // defaultExtension: 'js',
+        // defaultJSExtensions: true,
+        //format: 'register',
+        map: {
+          "js-base64": "node_modules/js-base64/base64.js",
+          "buffer": "node_modules/buffer/index.js",
+          "base64-js": "node_modules/base64-js/lib/b64.js",
+          "ieee754": "node_modules/ieee754/index.js",
+          "isarray": "node_modules/isarray/index.js",
+          "sha256": "node_modules/sha256/lib/sha256.js",
+          "convert-hex": "node_modules/convert-hex/convert-hex.js",
+          "convert-string": "node_modules/convert-string/convert-string.js"
+        },
         packages: {        
           app: {
             format: 'register',
             defaultExtension: 'js'
           }
+          
         }
       });
       System.import('app/boot')

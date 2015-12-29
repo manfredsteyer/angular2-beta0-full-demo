@@ -35,7 +35,7 @@
 		<th>Aktionen</th>
 	</tr>
 
-	<tr *ngFor='#f of flugManager.fluege' class="active" [class.active]='f == flugManager.selectedFlug' >
+	<tr *ngFor='#f of flugManager.fluegeStream | async' class="active" [class.active]='f == flugManager.selectedFlug' >
 		<td>{{f.id}}</td>
 		<td>{{f.datum.substr(0,10) }}</td>
 		<td>{{f.abflugort | ort:'short' }}</td>

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/flug-service', 'angular2/common', '../date-control/date-control'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../services/flug-service', 'angular2/common'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +8,8 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, flug_service_1, common_1, date_control_1, router_2;
-    var mayCurrentUserAccessProtectedRoute, FlugEdit;
+    var core_1, router_1, flug_service_1, common_1;
+    var FlugEdit;
     return {
         setters:[
             function (core_1_1) {
@@ -17,19 +17,14 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-                router_2 = router_1_1;
             },
             function (flug_service_1_1) {
                 flug_service_1 = flug_service_1_1;
             },
             function (common_1_1) {
                 common_1 = common_1_1;
-            },
-            function (date_control_1_1) {
-                date_control_1 = date_control_1_1;
             }],
         execute: function() {
-            mayCurrentUserAccessProtectedRoute = true;
             FlugEdit = (function () {
                 function FlugEdit(params, flugService) {
                     this.info = "FlugEdit!";
@@ -74,11 +69,7 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
                 FlugEdit = __decorate([
                     core_1.Component({
                         templateUrl: 'app/flug-edit/flug-edit.html',
-                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, date_control_1.DateControl]
-                    }),
-                    router_2.CanActivate(function (next, prev) {
-                        console.debug('CanActivate');
-                        return mayCurrentUserAccessProtectedRoute;
+                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES /*, DateControl*/]
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, flug_service_1.FlugService])
                 ], FlugEdit);

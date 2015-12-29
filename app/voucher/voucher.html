@@ -1,0 +1,11 @@
+<h2>Travel-Voucher</h2>
+
+<p *ngIf="message">
+    {{message}}
+</p>
+<p *ngIf="voucher">
+    <span style="background-color:LightSteelBlue">{{ voucher }}</span>
+</p>    
+<p>
+    <input type="button" value="Buy Voucher!" (click)="buyVoucher()" class="btn">
+</p>

@@ -17,7 +17,7 @@ import {AfterContentChecked } from 'angular2/core';
 
 @Component({ 
 	selector: 'flug-suchen',
-    templateUrl: 'app/flug-suchen/flug-suchen.html',
+    templateUrl: 'app/flug-suchen/flug-suchen-async.html',
 	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, OrtValidator, ShowError, ROUTER_DIRECTIVES, FlugCard],
 	pipes: [ /*OrtPipe*/ ]
 })

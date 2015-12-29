@@ -6,6 +6,9 @@
              <ul class="nav navbar-nav">
                  <li [class.active]="isActive('')"><a [routerLink]="['/Home']">Home</a></li> 
                  <li [class.active]="isActive('/flug-buchen')"><a [routerLink]="['/FlugBuchen']">Buchen</a></li> 
+                 <li [class.active]="isActive('/voucher')"><a [routerLink]="['/Voucher']">Gutscheine</a></li> 
+                 <li [class.active]="isActive('/login')"><a [routerLink]="['/Login']">Anmelden</a></li> 
+                 <li [class.active]="isActive('/logoff')"><a [routerLink]="['/Logoff']">Abmelden</a></li> 
              </ul>
         </nav>
      </header>

@@ -1,5 +1,5 @@
-System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common', './services/flug-service', './registry', 'angular2/http', 'angular2/router', './services/flug-event-service', './app', 'rxjs/add/operator/publish', 'rxjs/add/operator/share', 'rxjs/add/operator/catch', 'rxjs/add/observable/from'], function(exports_1) {
-    var browser_1, core_1, common_1, flug_service_1, registry_1, http_1, router_1, router_2, flug_event_service_1, app_1;
+System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common', './services/flug-service', './registry', 'angular2/http', 'angular2/router', './services/flug-event-service', './app', 'rxjs/add/operator/publish', 'rxjs/add/operator/share', 'rxjs/add/operator/catch', 'rxjs/add/operator/subscribeOn', 'rxjs/add/observable/from', './pipes/ort-pipe', './date-control/date-control', './oauth2/oauth-service', './services/configuration'], function(exports_1) {
+    var browser_1, core_1, common_1, flug_service_1, registry_1, http_1, router_1, router_2, flug_event_service_1, app_1, ort_pipe_1, date_control_1, core_2, oauth_service_1, configuration_1;
     var services;
     return {
         setters:[
@@ -8,6 +8,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common'
             },
             function (core_1_1) {
                 core_1 = core_1_1;
+                core_2 = core_1_1;
             },
             function (common_1_1) {
                 common_1 = common_1_1;
@@ -34,7 +35,20 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common'
             function (_1) {},
             function (_2) {},
             function (_3) {},
-            function (_4) {}],
+            function (_4) {},
+            function (_5) {},
+            function (ort_pipe_1_1) {
+                ort_pipe_1 = ort_pipe_1_1;
+            },
+            function (date_control_1_1) {
+                date_control_1 = date_control_1_1;
+            },
+            function (oauth_service_1_1) {
+                oauth_service_1 = oauth_service_1_1;
+            },
+            function (configuration_1_1) {
+                configuration_1 = configuration_1_1;
+            }],
         execute: function() {
             services = [
                 core_1.provide(flug_service_1.FlugService, { useClass: flug_service_1.FlugService }),
@@ -43,8 +57,12 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common'
                 http_1.HTTP_PROVIDERS,
                 common_1.FORM_PROVIDERS,
                 router_1.ROUTER_PROVIDERS,
+                oauth_service_1.OAuthService,
+                configuration_1.Configuration,
                 // provide(LocationStrategy, {useClass: HashLocationStrategy}),
-                router_2.Location
+                router_2.Location,
+                core_1.provide(core_2.PLATFORM_DIRECTIVES, { useValue: date_control_1.DateControl, multi: true }),
+                core_1.provide(core_2.PLATFORM_PIPES, { useValue: ort_pipe_1.OrtPipe, multi: true })
             ];
             browser_1.bootstrap(app_1.App, services);
         }
