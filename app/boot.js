@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common', './services/flug-service', './registry', 'angular2/http', 'angular2/router', './services/flug-event-service', './app', 'rxjs/add/operator/publish', 'rxjs/add/operator/share', 'rxjs/add/operator/catch', 'rxjs/add/operator/subscribeOn', 'rxjs/add/observable/from', './pipes/ort-pipe', './date-control/date-control', './oauth2/oauth-service', './services/configuration'], function(exports_1) {
+System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common', './services/flug-service', './registry', 'angular2/http', 'angular2/router', './services/flug-event-service', './app', 'rxjs/add/operator/publish', 'rxjs/add/operator/share', 'rxjs/add/operator/catch', 'rxjs/add/operator/subscribeOn', 'rxjs/add/observable/from', 'rxjs/add/operator/map', './pipes/ort-pipe', './date-control/date-control', './oauth2/oauth-service', './services/configuration'], function(exports_1) {
     var browser_1, core_1, common_1, flug_service_1, registry_1, http_1, router_1, router_2, flug_event_service_1, app_1, ort_pipe_1, date_control_1, core_2, oauth_service_1, configuration_1;
     var services;
     return {
@@ -37,6 +37,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common'
             function (_3) {},
             function (_4) {},
             function (_5) {},
+            function (_6) {},
             function (ort_pipe_1_1) {
                 ort_pipe_1 = ort_pipe_1_1;
             },

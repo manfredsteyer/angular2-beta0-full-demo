@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {OAuthService} from './../oauth2/oauth-service';
-import {Location} from 'angular2/router';
+import {Location, Router} from 'angular2/router';
+
 
 @Component({
 	templateUrl: 'app/home/home.html'

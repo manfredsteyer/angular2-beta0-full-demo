@@ -1,4 +1,4 @@
-<h1>Flug suchen!</h1>
+<h1>Flug suchen! (Imperativ)</h1>
 
 <form [ngFormModel]="filter">
 	<div class="form-group">
@@ -21,6 +21,14 @@
 			Zu kurz!!!
 		</div>
 
+		<div *ngIf="filter.controls.von.hasError('ortAsync')">
+			Der Ort existiert, aber es gibt in der nächsten Zeit keine Flüge.
+		</div>
+
+		<div *ngIf="filter.controls.von.pending">
+			Pending!!!
+		</div>
+
 	</div>
 
 	<div class="form-group">
@@ -36,6 +44,9 @@
 				(click)="suchen()">
 	</div>
 </form>
+
+
+
 <table class="table table-striped" *ngIf="fluege.length > 0">
 
 	<tr>

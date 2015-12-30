@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/flug-service', 'angular2/common'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../services/flug-service', 'angular2/common', '../validators/date-value-accessor'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, flug_service_1, common_1;
+    var core_1, router_1, flug_service_1, common_1, date_value_accessor_1;
     var FlugEdit;
     return {
         setters:[
@@ -23,6 +23,9 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
             },
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (date_value_accessor_1_1) {
+                date_value_accessor_1 = date_value_accessor_1_1;
             }],
         execute: function() {
             FlugEdit = (function () {
@@ -69,7 +72,7 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
                 FlugEdit = __decorate([
                     core_1.Component({
                         templateUrl: 'app/flug-edit/flug-edit.html',
-                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES /*, DateControl*/]
+                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, date_value_accessor_1.DateValueAccessor /*, DateControl*/]
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, flug_service_1.FlugService])
                 ], FlugEdit);

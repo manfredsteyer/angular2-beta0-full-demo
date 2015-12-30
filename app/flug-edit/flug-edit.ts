@@ -3,12 +3,13 @@ import {RouteParams } from 'angular2/router';
 import {FlugService} from '../services/flug-service';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import { DateControl } from '../date-control/date-control';
+import { DateValueAccessor } from '../validators/date-value-accessor';
 
 import { CanActivate, CanDeactivate, OnActivate, OnDeactivate, ComponentInstruction } from 'angular2/router';
 
 @Component({
 	templateUrl: 'app/flug-edit/flug-edit.html',
-	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES /*, DateControl*/]
+	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, DateValueAccessor /*, DateControl*/]
 })
 export class FlugEdit implements CanDeactivate, OnActivate, OnDeactivate, OnInit {
 	

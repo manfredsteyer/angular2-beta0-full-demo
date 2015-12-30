@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Location} from 'angular2/router';
 import {FlugSuchen} from '../flug-suchen/flug-suchen';
+import {FlugSuchen2} from '../flug-suchen2/flug-suchen2';
 import {PassagierSuchen} from '../passagier-suchen/passagier-suchen';
 import {Buchen} from '../buchen/buchen';
 import {FlugEdit} from '../flug-edit/flug-edit';
@@ -13,10 +14,11 @@ import {provide} from 'angular2/core';
     providers: [FlugManager]
 })
 @RouteConfig([
-	{ path: '/flug-suchen', component: FlugSuchen, as: 'FlugSuchen', useAsDefault: true },
-    { path: '/passagier-suchen', component: PassagierSuchen, as: 'PassagierSuchen' },
-    { path: '/buchen', component: Buchen, as: 'Buchen'},
-    { path: '/flug-edit/:id', component: FlugEdit, as: 'FlugEdit' }
+	{ path: '/flug-suchen', component: FlugSuchen, name: 'FlugSuchen', useAsDefault: true },
+	{ path: '/flug-suchen2', component: FlugSuchen2, name: 'FlugSuchen2' },    
+    { path: '/passagier-suchen', component: PassagierSuchen, name: 'PassagierSuchen' },
+    { path: '/buchen', component: Buchen, name: 'Buchen'},
+    { path: '/flug-edit/:id', component: FlugEdit, name: 'FlugEdit' }
 ])
 export class FlugBuchen {
     

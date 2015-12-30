@@ -1,6 +1,5 @@
-import {Component, provide, OnInit} from 'angular2/core';
-import {FORM_PROVIDERS} from 'angular2/common';
-import { FlugSuchen } from './flug-suchen/flug-suchen';
+import { Component, provide, OnInit} from 'angular2/core';
+import { FORM_PROVIDERS} from 'angular2/common';
 import { FlugService } from './services/flug-service';
 import { BASE_URL } from './registry';
 import { HTTP_PROVIDERS } from 'angular2/http';
@@ -14,7 +13,7 @@ import { Voucher } from './voucher/voucher';
 import { Login } from './login/login';
 import { Logoff} from './logoff/logoff';
 import { OAuthService} from './oauth2/oauth-service';
-import {Configuration} from './services/configuration';
+import { Configuration} from './services/configuration';
 
 @Component({
 	selector: 'app',
@@ -63,11 +62,11 @@ export class App {
             }
         });
 	}
-	
-	isActive(path): boolean {
+    
+    isActive(path): boolean {
         if (path == '') return this.location.path() == '';  
-		return (this.location.path().startsWith(path));
-	}
+        return (this.location.path().startsWith(path));
+    }
 }
 
 

@@ -13,12 +13,13 @@ import { FlugEventService } from './services/flug-event-service';
 import { App } from './app';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/publish';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/subscribeOn';
 import 'rxjs/add/observable/from';
-
+import 'rxjs/add/operator/map';
 
 import {Injector} from 'angular2/core';
 import {FlugManager} from './services/flug-manager';

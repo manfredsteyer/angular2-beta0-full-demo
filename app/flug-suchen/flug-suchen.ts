@@ -8,17 +8,15 @@ import { ShowError } from '../validators/show-error';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { FlugCard } from '../flug-card/flug-card';
 import {FlugManager} from '../services/flug-manager';
-import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/subject/BehaviorSubject';
-//import { ReplySubject } from 'rxjs/subject/ReplySubject';
-
+import { OrtAsyncValidator } from '../validators/ort-async-validator';
 import {FlugEventService} from '../services/flug-event-service';
 import {AfterContentChecked } from 'angular2/core';
 
 @Component({ 
 	selector: 'flug-suchen',
     templateUrl: 'app/flug-suchen/flug-suchen.html',
-	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, OrtValidator, ShowError, ROUTER_DIRECTIVES, FlugCard],
+	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, OrtValidator, OrtAsyncValidator, ShowError, ROUTER_DIRECTIVES, FlugCard],
 	pipes: [ /*OrtPipe*/ ]
 })
 export class FlugSuchen {

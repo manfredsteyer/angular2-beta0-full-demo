@@ -1,14 +1,15 @@
+<div *ngIf="!requestedPath">
+    <h1 *ngIf="name == null">Willkommen</h1>
+    <h1 *ngIf="name != null">Willkommen, {{name}}</h1>
 
-<h1 *ngIf="name == null">Willkommen</h1>
-<h1 *ngIf="name != null">Willkommen, {{name}}</h1>
-
-<p *ngIf="message">
-    {{message}}
-</p>
-    
-<p>
-    {{ info }}
-</p>
+    <p *ngIf="message">
+        {{message}}
+    </p>
+        
+    <p>
+        {{ info }}
+    </p>
+</div>
 
 <div *ngIf="!isLoggedIn">
     <h2>Anmelden</h2>

@@ -1,10 +1,10 @@
 import { Component, Inject } from 'angular2/core';
 import { NgIf, NgFor, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
 import { OrtPipe } from '../pipes/ort-pipe';
-//import { MY_DIRECTIVES } from '../registry';
 import { FlugService } from '../services/flug-service';
-import { ControlGroup, FormBuilder, Validators} from 'angular2/common';
+import { ControlGroup, FormBuilder, Validators, Control} from 'angular2/common';
 import { OrtValidator } from '../validators/ort-validator';
+import { OrtAsyncValidator } from '../validators/ort-async-validator';
 
 @Component({
 	selector: 'flug-suchen',
@@ -29,11 +29,14 @@ export class FlugSuchen2 {
 					Validators.required,
 					OrtValidator.validate,
 					Validators.minLength(2)
-				])
+				]),
+                Validators.composeAsync([
+                    OrtAsyncValidator.validate
+                ])
 			],
 			nach: ['Hamburg', Validators.required]
 		});
-		
+        
 	}
 	
 	suchen() {

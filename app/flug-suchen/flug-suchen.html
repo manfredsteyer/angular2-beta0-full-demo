@@ -4,9 +4,16 @@
 <form #f="ngForm">
 	<div class="form-group">
 		<label>Von</label>
-		<input [(ngModel)]="von" ngControl="von" ort required class="form-control">
+		<input [(ngModel)]="von" ngControl="von" ort-async required class="form-control">
 
 		<show-error control="von" [errors]="['required', 'ort']"></show-error>
+        
+        <div *ngIf="f?.controls?.von?.hasError('ortAsync')">
+            Ort wird nicht angeflogen!!!!
+        </div>
+        <div *ngIf="f?.controls?.von?.pending">
+            Pending!!
+        </div>
         
 	</div>
 

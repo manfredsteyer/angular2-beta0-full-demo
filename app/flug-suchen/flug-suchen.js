@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../validators/ort-validator', '../validators/show-error', 'angular2/router', '../flug-card/flug-card', '../services/flug-manager', 'rxjs/add/operator/map', '../services/flug-event-service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../validators/ort-validator', '../validators/show-error', 'angular2/router', '../flug-card/flug-card', '../services/flug-manager', '../validators/ort-async-validator', '../services/flug-event-service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', '../validators/ort-validato
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, ort_validator_1, show_error_1, router_1, flug_card_1, flug_manager_1, flug_event_service_1;
+    var core_1, common_1, ort_validator_1, show_error_1, router_1, flug_card_1, flug_manager_1, ort_async_validator_1, flug_event_service_1;
     var FlugSuchen;
     return {
         setters:[
@@ -33,7 +33,9 @@ System.register(['angular2/core', 'angular2/common', '../validators/ort-validato
             function (flug_manager_1_1) {
                 flug_manager_1 = flug_manager_1_1;
             },
-            function (_1) {},
+            function (ort_async_validator_1_1) {
+                ort_async_validator_1 = ort_async_validator_1_1;
+            },
             function (flug_event_service_1_1) {
                 flug_event_service_1 = flug_event_service_1_1;
             }],
@@ -67,7 +69,7 @@ System.register(['angular2/core', 'angular2/common', '../validators/ort-validato
                     core_1.Component({
                         selector: 'flug-suchen',
                         templateUrl: 'app/flug-suchen/flug-suchen.html',
-                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, ort_validator_1.OrtValidator, show_error_1.ShowError, router_1.ROUTER_DIRECTIVES, flug_card_1.FlugCard],
+                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, ort_validator_1.OrtValidator, ort_async_validator_1.OrtAsyncValidator, show_error_1.ShowError, router_1.ROUTER_DIRECTIVES, flug_card_1.FlugCard],
                         pipes: []
                     }), 
                     __metadata('design:paramtypes', [flug_manager_1.FlugManager, flug_event_service_1.FlugEventService])

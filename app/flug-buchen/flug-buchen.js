@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../flug-suchen/flug-suchen', '../passagier-suchen/passagier-suchen', '../buchen/buchen', '../flug-edit/flug-edit', '../services/flug-manager'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../flug-suchen/flug-suchen', '../flug-suchen2/flug-suchen2', '../passagier-suchen/passagier-suchen', '../buchen/buchen', '../flug-edit/flug-edit', '../services/flug-manager'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', '../flug-suchen/flug-suchen
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, flug_suchen_1, passagier_suchen_1, buchen_1, flug_edit_1, flug_manager_1;
+    var core_1, router_1, flug_suchen_1, flug_suchen2_1, passagier_suchen_1, buchen_1, flug_edit_1, flug_manager_1;
     var FlugBuchen;
     return {
         setters:[
@@ -20,6 +20,9 @@ System.register(['angular2/core', 'angular2/router', '../flug-suchen/flug-suchen
             },
             function (flug_suchen_1_1) {
                 flug_suchen_1 = flug_suchen_1_1;
+            },
+            function (flug_suchen2_1_1) {
+                flug_suchen2_1 = flug_suchen2_1_1;
             },
             function (passagier_suchen_1_1) {
                 passagier_suchen_1 = passagier_suchen_1_1;
@@ -51,10 +54,11 @@ System.register(['angular2/core', 'angular2/router', '../flug-suchen/flug-suchen
                         providers: [flug_manager_1.FlugManager]
                     }),
                     router_1.RouteConfig([
-                        { path: '/flug-suchen', component: flug_suchen_1.FlugSuchen, as: 'FlugSuchen', useAsDefault: true },
-                        { path: '/passagier-suchen', component: passagier_suchen_1.PassagierSuchen, as: 'PassagierSuchen' },
-                        { path: '/buchen', component: buchen_1.Buchen, as: 'Buchen' },
-                        { path: '/flug-edit/:id', component: flug_edit_1.FlugEdit, as: 'FlugEdit' }
+                        { path: '/flug-suchen', component: flug_suchen_1.FlugSuchen, name: 'FlugSuchen', useAsDefault: true },
+                        { path: '/flug-suchen2', component: flug_suchen2_1.FlugSuchen2, name: 'FlugSuchen2' },
+                        { path: '/passagier-suchen', component: passagier_suchen_1.PassagierSuchen, name: 'PassagierSuchen' },
+                        { path: '/buchen', component: buchen_1.Buchen, name: 'Buchen' },
+                        { path: '/flug-edit/:id', component: flug_edit_1.FlugEdit, name: 'FlugEdit' }
                     ]), 
                     __metadata('design:paramtypes', [router_1.Location, flug_manager_1.FlugManager])
                 ], FlugBuchen);
