@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', '../oauth2/oauth-service', '../oauth2/protected', '../services/configuration'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', '../oauth2/oauth-service', '../oauth2/protected', '../services/configuration', 'angular2/router'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/http', '../oauth2/oauth-service', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, oauth_service_1, protected_1, configuration_1;
+    var core_1, http_1, oauth_service_1, protected_1, configuration_1, router_1;
     var Voucher;
     return {
         setters:[
@@ -26,15 +26,20 @@ System.register(['angular2/core', 'angular2/http', '../oauth2/oauth-service', '.
             },
             function (configuration_1_1) {
                 configuration_1 = configuration_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             Voucher = (function () {
-                function Voucher(oauthService, http, config) {
+                function Voucher(oauthService, http, config, routeData) {
                     this.oauthService = oauthService;
                     this.http = http;
                     this.config = config;
+                    this.routeData = routeData;
                     this.voucher = "";
                     this.message = "";
+                    this.needVerifiedEmail = routeData.get("needVerifiedEmail");
                 }
                 Voucher.prototype.buyVoucher = function () {
                     var _this = this;
@@ -59,7 +64,7 @@ System.register(['angular2/core', 'angular2/http', '../oauth2/oauth-service', '.
                         templateUrl: 'app/voucher/voucher.html'
                     }),
                     protected_1.Protected(), 
-                    __metadata('design:paramtypes', [oauth_service_1.OAuthService, http_1.Http, configuration_1.Configuration])
+                    __metadata('design:paramtypes', [oauth_service_1.OAuthService, http_1.Http, configuration_1.Configuration, router_1.RouteData])
                 ], Voucher);
                 return Voucher;
             })();

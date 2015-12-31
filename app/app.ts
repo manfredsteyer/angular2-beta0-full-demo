@@ -23,10 +23,9 @@ import { Configuration} from './services/configuration';
 @RouteConfig([
 	{ path: '/', component: Home, name: 'Home', useAsDefault: true },
     { path: '/flug-buchen/...', component: FlugBuchen, name: 'FlugBuchen' },
-    { path: '/voucher', component: Voucher, name: 'Voucher' },
+    { path: '/voucher', component: Voucher, name: 'Voucher', data: {needVerifiedEmail: true} },
     { path: '/login', component: Login, name: 'Login' },
     { path: '/logoff', component: Logoff, name: 'Logoff' }
-    
 ])
 @CanActivate((next, prev) => {
     return true;     
@@ -64,6 +63,7 @@ export class App {
 	}
     
     isActive(path): boolean {
+        
         if (path == '') return this.location.path() == '';  
         return (this.location.path().startsWith(path));
     }

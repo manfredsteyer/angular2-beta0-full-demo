@@ -60,7 +60,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/common'
                 router_1.ROUTER_PROVIDERS,
                 oauth_service_1.OAuthService,
                 configuration_1.Configuration,
-                // provide(LocationStrategy, {useClass: HashLocationStrategy}),
+                //provide(LocationStrategy, {useClass: HashLocationStrategy}),
                 router_2.Location,
                 core_1.provide(core_2.PLATFORM_DIRECTIVES, { useValue: date_control_1.DateControl, multi: true }),
                 core_1.provide(core_2.PLATFORM_PIPES, { useValue: ort_pipe_1.OrtPipe, multi: true })

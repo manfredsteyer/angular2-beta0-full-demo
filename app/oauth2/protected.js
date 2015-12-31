@@ -7,6 +7,16 @@ System.register(['angular2/router', '../home/home', '../oauth2/oauth-service'], 
                 next.componentType = home_1.Home;
                 next.urlParams = ["login=" + next.urlPath];
             }
+            var hasVerifiedEmail = false;
+            var needVerifiedEmail = next.routeData.get("needVerifiedEmail");
+            var claims = oauthService.getIdentityClaims();
+            if (claims) {
+                hasVerifiedEmail = claims.email_verified;
+            }
+            if (needVerifiedEmail && !hasVerifiedEmail) {
+                next.componentType = home_1.Home;
+                next.urlParams = ["login=" + next.urlPath];
+            }
             return true;
         });
     }

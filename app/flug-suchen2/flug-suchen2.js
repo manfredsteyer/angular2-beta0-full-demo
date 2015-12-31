@@ -50,12 +50,6 @@ System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../se
                         ],
                         nach: ['Hamburg', common_2.Validators.required]
                     });
-                    // Async-Validator-Demo
-                    /*
-                    this.filter.find("von").asyncValidator = Validators.composeAsync([
-                        OrtAsyncValidator.validate
-                    ]);
-                    */
                 }
                 FlugSuchen2.prototype.suchen = function () {
                     var _this = this;

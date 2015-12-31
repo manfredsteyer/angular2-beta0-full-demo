@@ -3,7 +3,7 @@ import {Http, Headers} from 'angular2/http';
 import {OAuthService} from '../oauth2/oauth-service';
 import {Protected} from '../oauth2/protected';
 import {Configuration} from '../services/configuration';
-import {CanActivate} from 'angular2/router';
+import {CanActivate, RouteData} from 'angular2/router';
 
 @Component({
     templateUrl: 'app/voucher/voucher.html'
@@ -27,11 +27,15 @@ export class Voucher {
     constructor(
         private oauthService: OAuthService, 
         private http:Http, 
-        private config: Configuration) {     
+        private config: Configuration,
+        private routeData: RouteData) {
+            
+            this.needVerifiedEmail = routeData.get("needVerifiedEmail");     
     }
     
     voucher = "";
     message = "";
+    needVerifiedEmail;
     
     buyVoucher() {
         

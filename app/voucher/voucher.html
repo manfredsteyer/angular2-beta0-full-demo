@@ -1,5 +1,9 @@
 <h2>Travel-Voucher</h2>
 
+<p *ngIf="needVerifiedEmail">
+    Please check your registered Email-Account for the invoice after buying a voucher.
+</p>
+
 <p *ngIf="message">
     {{message}}
 </p>

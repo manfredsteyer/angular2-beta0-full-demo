@@ -79,7 +79,7 @@ System.register(['angular2/core', 'angular2/router', './home/home', './flug-buch
                     router_1.RouteConfig([
                         { path: '/', component: home_1.Home, name: 'Home', useAsDefault: true },
                         { path: '/flug-buchen/...', component: flug_buchen_1.FlugBuchen, name: 'FlugBuchen' },
-                        { path: '/voucher', component: voucher_1.Voucher, name: 'Voucher' },
+                        { path: '/voucher', component: voucher_1.Voucher, name: 'Voucher', data: { needVerifiedEmail: true } },
                         { path: '/login', component: login_1.Login, name: 'Login' },
                         { path: '/logoff', component: logoff_1.Logoff, name: 'Logoff' }
                     ]),

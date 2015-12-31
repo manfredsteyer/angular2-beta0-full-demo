@@ -40,7 +40,7 @@ var services = [
 	ROUTER_PROVIDERS,
     OAuthService,
     Configuration,
-	// provide(LocationStrategy, {useClass: HashLocationStrategy}),
+	//provide(LocationStrategy, {useClass: HashLocationStrategy}),
 	Location,
     provide(PLATFORM_DIRECTIVES, {useValue: DateControl, multi: true}),
     provide(PLATFORM_PIPES, {useValue: OrtPipe, multi: true})
