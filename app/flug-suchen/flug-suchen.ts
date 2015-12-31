@@ -36,19 +36,22 @@ export class FlugSuchen {
         this.flugEventService = flugEventService;
 	}
     
-	suchen(f) {
-		
-		this.flugManager
-			.load(this.von, this.nach)
-            .subscribe(
-                (fluege) => { 
-                    this.message = "Flüge geladen!";
-                    this.fluege = fluege;
-                }, 
-                (err) => {
-                    console.error(err);
-                    this.message = "Fehler beim Laden von Flügen!";
-                });
+	suchen() {
+		return new Promise((resolve, reject) => { 
+            this.flugManager
+                .load(this.von, this.nach)
+                .subscribe(
+                    (fluege) => { 
+                        this.message = "Flüge geladen!";
+                        this.fluege = fluege;
+                        resolve();
+                    }, 
+                    (err) => {
+                        console.error(err);
+                        this.message = "Fehler beim Laden von Flügen!";
+                        reject();
+                    });
+        });                
 	}
 	
 	selectFlug(flug) {

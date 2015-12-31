@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>1st Jasmine Tests</title>
+    <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
+
+    <!-- jasmine -->
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+
+    <!-- angular 2 -->
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/testing.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+</head>
+<body>
+
+  <script>
+    System.config({
+      packages: {
+        'app': {defaultExtension: 'js'}
+      }
+    });
+    
+    Promise.all([
+        System.import('app/flug-suchen/flug-suchen.spec'),
+        System.import('app/flug-suchen/flug-suchen.http-mock.spec')        
+    ])
+    .then(window.onload)
+    .catch(console.error.bind(console));
+  </script>
+
+
+</body>
+</html>

@@ -49,16 +49,20 @@ System.register(['angular2/core', 'angular2/common', '../validators/ort-validato
                     this.flugManager = flugManager;
                     this.flugEventService = flugEventService;
                 }
-                FlugSuchen.prototype.suchen = function (f) {
+                FlugSuchen.prototype.suchen = function () {
                     var _this = this;
-                    this.flugManager
-                        .load(this.von, this.nach)
-                        .subscribe(function (fluege) {
-                        _this.message = "Flüge geladen!";
-                        _this.fluege = fluege;
-                    }, function (err) {
-                        console.error(err);
-                        _this.message = "Fehler beim Laden von Flügen!";
+                    return new Promise(function (resolve, reject) {
+                        _this.flugManager
+                            .load(_this.von, _this.nach)
+                            .subscribe(function (fluege) {
+                            _this.message = "Flüge geladen!";
+                            _this.fluege = fluege;
+                            resolve();
+                        }, function (err) {
+                            console.error(err);
+                            _this.message = "Fehler beim Laden von Flügen!";
+                            reject();
+                        });
                     });
                 };
                 FlugSuchen.prototype.selectFlug = function (flug) {

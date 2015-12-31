@@ -36,7 +36,7 @@ var services = [
     FlugEventService,
 	provide(BASE_URL, { useValue: 'http://www.angular.at/api'}),
 	HTTP_PROVIDERS,
-	FORM_PROVIDERS,
+	// FORM_PROVIDERS,
 	ROUTER_PROVIDERS,
     OAuthService,
     Configuration,
