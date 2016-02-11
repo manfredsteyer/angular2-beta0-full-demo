@@ -1,7 +1,8 @@
 import {Pipe} from 'angular2/core';
 
 @Pipe({
-	name: 'ort'
+	name: 'ort',
+    pure: true
 })
 export class OrtPipe {
 	

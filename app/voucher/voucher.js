@@ -47,6 +47,7 @@ System.register(['angular2/core', 'angular2/http', '../oauth2/oauth-service', '.
                     var headers = new http_1.Headers({
                         "Authorization": "Bearer " + this.oauthService.getAccessToken()
                     });
+                    // "Authorization": "Basic base64(username:pwd)"
                     this.http
                         .post(url, "", { headers: headers })
                         .subscribe(function (response) {

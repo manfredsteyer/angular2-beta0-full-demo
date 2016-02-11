@@ -3,26 +3,39 @@ import { NgIf, NgFor, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
 import { OrtPipe } from '../pipes/ort-pipe';
 import { FlugService } from '../services/flug-service';
 import { Inject} from 'angular2/core';
-import { OrtValidator } from '../validators/ort-validator';
+import { OrtValidatorDirective } from '../validators/ort-validator';
 import { ShowError } from '../validators/show-error';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { FlugCard } from '../flug-card/flug-card';
 import {FlugManager} from '../services/flug-manager';
 import { BehaviorSubject } from 'rxjs/subject/BehaviorSubject';
-import { OrtAsyncValidator } from '../validators/ort-async-validator';
+import { OrtAsyncValidatorDirective } from '../validators/ort-async-validator';
 import {FlugEventService} from '../services/flug-event-service';
 import {AfterContentChecked } from 'angular2/core';
+import { RangeValidatorDirective } from '../validators/range-validator';
+import { RouteValidatorDirective } from '../validators/route-validator';
 
 @Component({ 
 	selector: 'flug-suchen',
     templateUrl: 'app/flug-suchen/flug-suchen.html',
-	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, OrtValidator, OrtAsyncValidator, ShowError, ROUTER_DIRECTIVES, FlugCard],
+
+	directives: [
+        OrtValidatorDirective, 
+        OrtAsyncValidatorDirective, 
+        ShowError, 
+        ROUTER_DIRECTIVES, 
+        FlugCard, 
+        RangeValidatorDirective, 
+        RouteValidatorDirective
+    ],
 	pipes: [ /*OrtPipe*/ ]
 })
 export class FlugSuchen {
 	
 	von: string = "Graz";
 	nach: string = "Hamburg";
+    maxSegmente: number = 2;
+    
 	fluege = [];
 	// selectedFlug;
 	//flugService: FlugService;

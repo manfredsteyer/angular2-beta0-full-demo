@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/flug-service', 'angular2/common', '../validators/date-value-accessor'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../services/flug-service', 'angular2/common', '../validators/date-value-accessor', '../validators/range-validator'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, flug_service_1, common_1, date_value_accessor_1;
+    var core_1, router_1, flug_service_1, common_1, date_value_accessor_1, range_validator_1;
     var FlugEdit;
     return {
         setters:[
@@ -26,12 +26,19 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
             },
             function (date_value_accessor_1_1) {
                 date_value_accessor_1 = date_value_accessor_1_1;
+            },
+            function (range_validator_1_1) {
+                range_validator_1 = range_validator_1_1;
             }],
         execute: function() {
             FlugEdit = (function () {
                 function FlugEdit(params, flugService) {
                     this.info = "FlugEdit!";
                     this.flug = {};
+                    this.exitWarning = {
+                        show: false,
+                        resolve: null
+                    };
                     this.id = params.get('id');
                     this.flugService = flugService;
                 }
@@ -44,8 +51,16 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
                     });
                 };
                 FlugEdit.prototype.routerCanDeactivate = function (nextInstruction, prevInstruction) {
+                    var _this = this;
                     console.debug("routerCanDeactivate");
-                    return confirm("Verlassen?");
+                    //return confirm("Verlassen?");
+                    this.exitWarning.show = true;
+                    return new Promise(function (resolve) {
+                        _this.exitWarning.resolve = resolve;
+                    }).then(function (result) {
+                        _this.exitWarning.show = false;
+                        return result;
+                    });
                 };
                 FlugEdit.prototype.routerOnActivate = function (nextInstruction, prevInstruction) {
                     console.debug("routerOnActivate");
@@ -72,7 +87,7 @@ System.register(['angular2/core', 'angular2/router', '../services/flug-service',
                 FlugEdit = __decorate([
                     core_1.Component({
                         templateUrl: 'app/flug-edit/flug-edit.html',
-                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, date_value_accessor_1.DateValueAccessor /*, DateControl*/]
+                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, date_value_accessor_1.DateValueAccessor, range_validator_1.RangeValidatorDirective]
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, flug_service_1.FlugService])
                 ], FlugEdit);

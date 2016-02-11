@@ -42,8 +42,10 @@ export class Voucher {
         var url = this.config.apiUrl + "/api/voucher?amount=150";
         
         var headers = new Headers({
-            "Authorization": "Bearer " + this.oauthService.getAccessToken() 
+            "Authorization": "Bearer " + this.oauthService.getAccessToken()
         });
+        
+        // "Authorization": "Basic base64(username:pwd)"
         
         this.http
             .post(url, "", { headers })

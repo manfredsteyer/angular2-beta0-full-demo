@@ -5,6 +5,8 @@ import { FlugSuchen } from './flug-suchen/flug-suchen';
 import { FlugService } from './services/flug-service';
 import { BASE_URL } from './registry';
 import { HTTP_PROVIDERS } from 'angular2/http';
+import { BaseRequestOptions, RequestOptions } from 'angular2/http';
+
 import { ROUTER_DIRECTIVES, RouteConfig, ROUTER_PROVIDERS, CanActivate } from 'angular2/router';
 import { Location, HashLocationStrategy, LocationStrategy } from 'angular2/router';
 import { Home } from './home/home';
@@ -31,6 +33,9 @@ import {PLATFORM_DIRECTIVES, PLATFORM_PIPES} from 'angular2/core';
 import {OAuthService} from './oauth2/oauth-service';
 import {Configuration} from './services/configuration';
 
+var options = new BaseRequestOptions();
+options.headers.append("Authorization", "TEST 12345");
+
 var services = [
 	provide(FlugService, { useClass: FlugService }),
     FlugEventService,
@@ -40,6 +45,7 @@ var services = [
 	ROUTER_PROVIDERS,
     OAuthService,
     Configuration,
+    //provide(RequestOptions, {useValue: options}),
 	//provide(LocationStrategy, {useClass: HashLocationStrategy}),
 	Location,
     provide(PLATFORM_DIRECTIVES, {useValue: DateControl, multi: true}),
@@ -47,6 +53,7 @@ var services = [
 ];
 
 bootstrap(App, services);
+
 
 /*
 var injector = Injector.resolveAndCreate(services);
@@ -57,7 +64,51 @@ cache.load("Graz", "Hamburg").subscribe((fluege) => {
     
 });
 */
+
 /*
+var promise = new Promise((resolve, reject) => {
+   resolve(4711); 
+   //reject("err!");
+});
+
+promise
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+var o = Observable.create((source) => {
+    console.log("start producing ...");
+    source.next(4711);
+    source.next(815);
+    //observer.error("err!");
+    source.complete();
+    return () => { console.log("dispose"); };
+});
+
+var abo = o.map(data => "!" + data + "!")
+ .subscribe(
+     data => {
+         console.debug(data);
+     },
+     err => {
+         console.debug(err);
+     },
+     () => {
+         console.debug("done!");
+     }
+);
+
+abo.unsubscribe();
+
+
+
+
+*/
+
+
 var o = Observable.create((observer) => {
    
    setTimeout(() => {
@@ -67,7 +118,7 @@ var o = Observable.create((observer) => {
     
 }).publish().connect();
 
-
+/*
 
 o.map(data => "!" + data + "!")
  .subscribe(

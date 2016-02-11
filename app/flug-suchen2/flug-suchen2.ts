@@ -5,11 +5,13 @@ import { FlugService } from '../services/flug-service';
 import { ControlGroup, FormBuilder, Validators, Control} from 'angular2/common';
 import { OrtValidator } from '../validators/ort-validator';
 import { OrtAsyncValidator } from '../validators/ort-async-validator';
+import { RangeValidator } from '../validators/range-validator';
+import { RouteValidator } from '../validators/route-validator';
 
 @Component({
 	selector: 'flug-suchen',
 	templateUrl: 'app/flug-suchen2/flug-suchen2.html',
-	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, OrtValidator],
+	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
 	pipes: [OrtPipe]
 })
 export class FlugSuchen2 {
@@ -34,8 +36,11 @@ export class FlugSuchen2 {
                     OrtAsyncValidator.validate
                 ])
 			],
-			nach: ['Hamburg', Validators.required]
+			nach: ['Hamburg', Validators.required],
+            maxSegmente: ['2', RangeValidator.create(1,5)]
 		});
+        
+        this.filter.validator = RouteValidator.validate;
         
 	}
 	

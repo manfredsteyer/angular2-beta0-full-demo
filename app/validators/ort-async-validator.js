@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, common_1;
-    var OrtAsyncValidator;
+    var OrtAsyncValidatorDirective, OrtAsyncValidator;
     return {
         setters:[
             function (core_1_1) {
@@ -19,6 +19,22 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                 common_1 = common_1_1;
             }],
         execute: function() {
+            OrtAsyncValidatorDirective = (function () {
+                function OrtAsyncValidatorDirective() {
+                }
+                OrtAsyncValidatorDirective.prototype.validate = function (c) {
+                    return OrtAsyncValidator.validate(c);
+                };
+                OrtAsyncValidatorDirective = __decorate([
+                    core_1.Directive({
+                        selector: '[ortAsync]',
+                        bindings: [new core_1.Provider(common_1.NG_ASYNC_VALIDATORS, { useExisting: OrtAsyncValidatorDirective, multi: true })]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], OrtAsyncValidatorDirective);
+                return OrtAsyncValidatorDirective;
+            })();
+            exports_1("OrtAsyncValidatorDirective", OrtAsyncValidatorDirective);
             OrtAsyncValidator = (function () {
                 function OrtAsyncValidator() {
                 }
@@ -40,13 +56,6 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                         }, 3000);
                     });
                 };
-                OrtAsyncValidator = __decorate([
-                    core_1.Directive({
-                        selector: '[ort-async]',
-                        bindings: [new core_1.Provider(common_1.NG_ASYNC_VALIDATORS, { useValue: OrtAsyncValidator.validate, multi: true })]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], OrtAsyncValidator);
                 return OrtAsyncValidator;
             })();
             exports_1("OrtAsyncValidator", OrtAsyncValidator);

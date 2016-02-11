@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../services/flug-service', '../validators/ort-validator', '../validators/ort-async-validator'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../services/flug-service', '../validators/ort-validator', '../validators/ort-async-validator', '../validators/range-validator', '../validators/route-validator'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../se
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, ort_pipe_1, flug_service_1, common_2, ort_validator_1, ort_async_validator_1;
+    var core_1, common_1, ort_pipe_1, flug_service_1, common_2, ort_validator_1, ort_async_validator_1, range_validator_1, route_validator_1;
     var FlugSuchen2;
     return {
         setters:[
@@ -30,6 +30,12 @@ System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../se
             },
             function (ort_async_validator_1_1) {
                 ort_async_validator_1 = ort_async_validator_1_1;
+            },
+            function (range_validator_1_1) {
+                range_validator_1 = range_validator_1_1;
+            },
+            function (route_validator_1_1) {
+                route_validator_1 = route_validator_1_1;
             }],
         execute: function() {
             FlugSuchen2 = (function () {
@@ -48,8 +54,10 @@ System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../se
                                 ort_async_validator_1.OrtAsyncValidator.validate
                             ])
                         ],
-                        nach: ['Hamburg', common_2.Validators.required]
+                        nach: ['Hamburg', common_2.Validators.required],
+                        maxSegmente: ['2', range_validator_1.RangeValidator.create(1, 5)]
                     });
+                    this.filter.validator = route_validator_1.RouteValidator.validate;
                 }
                 FlugSuchen2.prototype.suchen = function () {
                     var _this = this;
@@ -67,7 +75,7 @@ System.register(['angular2/core', 'angular2/common', '../pipes/ort-pipe', '../se
                     core_1.Component({
                         selector: 'flug-suchen',
                         templateUrl: 'app/flug-suchen2/flug-suchen2.html',
-                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, ort_validator_1.OrtValidator],
+                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
                         pipes: [ort_pipe_1.OrtPipe]
                     }), 
                     __metadata('design:paramtypes', [flug_service_1.FlugService, common_2.FormBuilder])

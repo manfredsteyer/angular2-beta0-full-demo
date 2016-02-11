@@ -20,13 +20,16 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                 common_1 = common_1_1;
             }],
         execute: function() {
-            // <flug-card [item]="f" [selected]="..." (item-selected)="$event"></flug-card>
+            // <flug-card [item]="f" 
+            //            [selectedItem]="..." 
+            //            (selectedItemChange)="...">
+            // </flug-card>
             FlugCard = (function () {
                 function FlugCard() {
-                    this.itemSelected = new core_2.EventEmitter();
+                    this.selectedItemChange = new core_2.EventEmitter();
                 }
                 FlugCard.prototype.select = function () {
-                    this.itemSelected.next(this.flug);
+                    this.selectedItemChange.next(this.flug);
                 };
                 __decorate([
                     core_1.Input('item'), 
@@ -34,17 +37,18 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                 ], FlugCard.prototype, "flug", void 0);
                 __decorate([
                     core_1.Input(), 
-                    __metadata('design:type', Boolean)
-                ], FlugCard.prototype, "selected", void 0);
+                    __metadata('design:type', Object)
+                ], FlugCard.prototype, "selectedItem", void 0);
                 __decorate([
                     core_2.Output(), 
                     __metadata('design:type', Object)
-                ], FlugCard.prototype, "itemSelected", void 0);
+                ], FlugCard.prototype, "selectedItemChange", void 0);
                 FlugCard = __decorate([
                     core_1.Component({
                         selector: 'flug-card',
                         directives: [common_1.CORE_DIRECTIVES],
-                        templateUrl: 'app/flug-card/flug-card.html'
+                        templateUrl: 'app/flug-card/flug-card.html',
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
                     __metadata('design:paramtypes', [])
                 ], FlugCard);

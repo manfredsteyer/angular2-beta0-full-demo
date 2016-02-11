@@ -25,7 +25,6 @@ import {BrowserDomAdapter} from 'angular2/src/platform/browser/browser_adapter';
 BrowserDomAdapter.makeCurrent();
 
 // Http-Mock-Bindings
-
 var HTTP_MOCK_PROVIDERS = [
     BaseRequestOptions,
     MockBackend,
@@ -49,21 +48,34 @@ describe('FlugSuchen with Mock', () => {
         return new Promise((resolve) => {
 
             var connection;
-            backend.connections.subscribe(c => { connection = c; });
+            backend.connections.subscribe(c => { 
+                connection = c; 
+            });
             
             flugSuchen.von = "Graz";
             flugSuchen.nach = "Hamburg";
+    
             
             flugSuchen.suchen().then(() => { 
                 expect(flugSuchen.fluege.length).toEqual(1);  
-                resolve();  
             });
-            
+
             connection.mockRespond(
                 new Response(
                     new ResponseOptions(
                         {body: '[{"id": 1, "abflugort": "Graz", "zielort": "Hamburg", "datum": "2017-01-01"}]'})));
         
+
+            flugSuchen.suchen().then(() => { 
+                expect(flugSuchen.fluege.length).toEqual(1);  
+            });
+
+            connection.mockRespond(
+                new Response(
+                    new ResponseOptions(
+                        {body: '[{"id": 1, "abflugort": "Graz", "zielort": "Hamburg", "datum": "2017-01-01"}]'})));
+
+
         });
     }));
     

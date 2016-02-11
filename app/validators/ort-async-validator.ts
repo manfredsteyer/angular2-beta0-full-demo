@@ -1,10 +1,17 @@
 import { Directive, Provider } from 'angular2/core';
-import { NG_ASYNC_VALIDATORS, Control } from 'angular2/common';
+import { NG_ASYNC_VALIDATORS, Control, Validator } from 'angular2/common';
 
 @Directive({
-	selector: '[ort-async]',  // <input ort
-	bindings: [new Provider(NG_ASYNC_VALIDATORS , {useValue: OrtAsyncValidator.validate, multi: true})]
+	selector: '[ortAsync]',  // <input ort
+	bindings: [new Provider(NG_ASYNC_VALIDATORS , {useExisting: OrtAsyncValidatorDirective, multi: true})]
 }) 
+export class OrtAsyncValidatorDirective implements Validator {
+    
+    validate(c: Control) {
+        return OrtAsyncValidator.validate(c);
+    }
+}
+
 export class OrtAsyncValidator {
 	
 	static validate(ctrl: Control): any {

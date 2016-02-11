@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, common_1;
-    var OrtValidator;
+    var OrtValidatorDirective, OrtValidator;
     return {
         setters:[
             function (core_1_1) {
@@ -19,6 +19,22 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                 common_1 = common_1_1;
             }],
         execute: function() {
+            OrtValidatorDirective = (function () {
+                function OrtValidatorDirective() {
+                }
+                OrtValidatorDirective.prototype.validate = function (c) {
+                    return OrtValidator.validate(c);
+                };
+                OrtValidatorDirective = __decorate([
+                    core_1.Directive({
+                        selector: '[ort]',
+                        bindings: [new core_1.Provider(common_1.NG_VALIDATORS, { useExisting: OrtValidatorDirective, multi: true })]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], OrtValidatorDirective);
+                return OrtValidatorDirective;
+            })();
+            exports_1("OrtValidatorDirective", OrtValidatorDirective);
             OrtValidator = (function () {
                 function OrtValidator() {
                 }
@@ -33,13 +49,6 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                         ort: true
                     };
                 };
-                OrtValidator = __decorate([
-                    core_1.Directive({
-                        selector: '[ort]',
-                        bindings: [new core_1.Provider(common_1.NG_VALIDATORS, { useValue: OrtValidator.validate, multi: true })]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], OrtValidator);
                 return OrtValidator;
             })();
             exports_1("OrtValidator", OrtValidator);

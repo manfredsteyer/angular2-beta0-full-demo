@@ -62,12 +62,17 @@ System.register(['angular2/testing', 'angular2/core', './flug-suchen', './../ser
                 testing_1.it('should load flights', testing_1.injectAsync([flug_suchen_1.FlugSuchen, testing_2.MockBackend], function (flugSuchen, backend) {
                     return new Promise(function (resolve) {
                         var connection;
-                        backend.connections.subscribe(function (c) { connection = c; });
+                        backend.connections.subscribe(function (c) {
+                            connection = c;
+                        });
                         flugSuchen.von = "Graz";
                         flugSuchen.nach = "Hamburg";
                         flugSuchen.suchen().then(function () {
                             expect(flugSuchen.fluege.length).toEqual(1);
-                            resolve();
+                        });
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ body: '[{"id": 1, "abflugort": "Graz", "zielort": "Hamburg", "datum": "2017-01-01"}]' })));
+                        flugSuchen.suchen().then(function () {
+                            expect(flugSuchen.fluege.length).toEqual(1);
                         });
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ body: '[{"id": 1, "abflugort": "Graz", "zielort": "Hamburg", "datum": "2017-01-01"}]' })));
                     });

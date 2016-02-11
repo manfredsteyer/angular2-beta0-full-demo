@@ -3,7 +3,8 @@ import { FORM_PROVIDERS} from 'angular2/common';
 import { FlugService } from './services/flug-service';
 import { BASE_URL } from './registry';
 import { HTTP_PROVIDERS } from 'angular2/http';
-import { ROUTER_DIRECTIVES, RouteConfig, ROUTER_PROVIDERS, CanActivate } from 'angular2/router';
+import { RequestOptions } from 'angular2/http';
+import { ROUTER_DIRECTIVES, RouteConfig, ROUTER_PROVIDERS, CanActivate, Router } from 'angular2/router';
 import { Location, HashLocationStrategy, LocationStrategy } from 'angular2/router';
 import { Home } from './home/home';
 import { FlugEdit } from './flug-edit/flug-edit';
@@ -19,17 +20,14 @@ import { Configuration} from './services/configuration';
 	selector: 'app',
 	directives: [ROUTER_DIRECTIVES, Warenkorb],
 	templateUrl: 'app/app.html'
-})
+}) 
 @RouteConfig([
-	{ path: '/', component: Home, name: 'Home', useAsDefault: true },
-    { path: '/flug-buchen/...', component: FlugBuchen, name: 'FlugBuchen' },
+	{ path: '/', component: Home, name: 'Home' },
+    { path: '/flug-buchen/...', component: FlugBuchen, name: 'FlugBuchen', useAsDefault: true },
     { path: '/voucher', component: Voucher, name: 'Voucher', data: {needVerifiedEmail: true} },
     { path: '/login', component: Login, name: 'Login' },
     { path: '/logoff', component: Logoff, name: 'Logoff' }
 ])
-@CanActivate((next, prev) => {
-    return true;     
-})
 export class App {
 	title;
 	location: Location;
@@ -39,14 +37,15 @@ export class App {
 	constructor(
         location: Location, 
         oauthService: OAuthService,
-        config: Configuration) {
+        config: Configuration,
+        options: RequestOptions) {
             
 		this.title = "Flug-Demo-App";
 		this.location = location;
         this.oauthService = oauthService;
         this.config = config;
         
-        this.oauthService.loginUrl =  this.config.loginUrl; 
+        this.oauthService.loginUrl =  this.config.loginUrl; //Id-Provider?
         this.oauthService.redirectUri = window.location.origin + "/index.html"; 
         this.oauthService.clientId = "spa-demo"; 
         this.oauthService.scope = "openid profile email voucher"; 
@@ -55,6 +54,8 @@ export class App {
 
         this.oauthService.tryLogin({
             onTokenReceived: (context) => {
+                
+                options.headers.set("Authorization", "Bearer " + context.accessToken);
                 if (context.state) {
                     this.location.replaceState(context.state);
                 } 

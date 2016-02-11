@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './home/home', './flug-buchen/flug-buchen', './warenkorb/warenkorb', './voucher/voucher', './login/login', './logoff/logoff', './oauth2/oauth-service', './services/configuration'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', './home/home', './flug-buchen/flug-buchen', './warenkorb/warenkorb', './voucher/voucher', './login/login', './logoff/logoff', './oauth2/oauth-service', './services/configuration'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,12 +8,15 @@ System.register(['angular2/core', 'angular2/router', './home/home', './flug-buch
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, router_2, home_1, flug_buchen_1, warenkorb_1, voucher_1, login_1, logoff_1, oauth_service_1, configuration_1;
+    var core_1, http_1, router_1, router_2, home_1, flug_buchen_1, warenkorb_1, voucher_1, login_1, logoff_1, oauth_service_1, configuration_1;
     var App;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -45,13 +48,13 @@ System.register(['angular2/core', 'angular2/router', './home/home', './flug-buch
             }],
         execute: function() {
             App = (function () {
-                function App(location, oauthService, config) {
+                function App(location, oauthService, config, options) {
                     var _this = this;
                     this.title = "Flug-Demo-App";
                     this.location = location;
                     this.oauthService = oauthService;
                     this.config = config;
-                    this.oauthService.loginUrl = this.config.loginUrl;
+                    this.oauthService.loginUrl = this.config.loginUrl; //Id-Provider?
                     this.oauthService.redirectUri = window.location.origin + "/index.html";
                     this.oauthService.clientId = "spa-demo";
                     this.oauthService.scope = "openid profile email voucher";
@@ -59,6 +62,7 @@ System.register(['angular2/core', 'angular2/router', './home/home', './flug-buch
                     this.oauthService.oidc = true;
                     this.oauthService.tryLogin({
                         onTokenReceived: function (context) {
+                            options.headers.set("Authorization", "Bearer " + context.accessToken);
                             if (context.state) {
                                 _this.location.replaceState(context.state);
                             }
@@ -77,16 +81,13 @@ System.register(['angular2/core', 'angular2/router', './home/home', './flug-buch
                         templateUrl: 'app/app.html'
                     }),
                     router_1.RouteConfig([
-                        { path: '/', component: home_1.Home, name: 'Home', useAsDefault: true },
-                        { path: '/flug-buchen/...', component: flug_buchen_1.FlugBuchen, name: 'FlugBuchen' },
+                        { path: '/', component: home_1.Home, name: 'Home' },
+                        { path: '/flug-buchen/...', component: flug_buchen_1.FlugBuchen, name: 'FlugBuchen', useAsDefault: true },
                         { path: '/voucher', component: voucher_1.Voucher, name: 'Voucher', data: { needVerifiedEmail: true } },
                         { path: '/login', component: login_1.Login, name: 'Login' },
                         { path: '/logoff', component: logoff_1.Logoff, name: 'Logoff' }
-                    ]),
-                    router_1.CanActivate(function (next, prev) {
-                        return true;
-                    }), 
-                    __metadata('design:paramtypes', [router_2.Location, oauth_service_1.OAuthService, configuration_1.Configuration])
+                    ]), 
+                    __metadata('design:paramtypes', [router_2.Location, oauth_service_1.OAuthService, configuration_1.Configuration, http_1.RequestOptions])
                 ], App);
                 return App;
             })();

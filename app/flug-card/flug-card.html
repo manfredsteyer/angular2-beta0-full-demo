@@ -1,6 +1,6 @@
 
 <div style="padding:20px;" 
-	[ngStyle]="{'background-color': (selected) ? 'orange' : 'lightsteelblue' }" >
+	[ngStyle]="{'background-color': (selectedItem == flug) ? 'orange' : 'lightsteelblue' }" >
 
 	<h2>{{flug.abflugort}} - {{flug.zielort}}</h2>
 	<p>Flugnr. #{{flug.id}}</p>	

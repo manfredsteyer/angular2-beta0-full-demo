@@ -1,11 +1,16 @@
-<h1>Flug suchen! (Imperativ)</h1>
+<h1>Flug suchen (Imperativ)</h1>
 
 <form [ngFormModel]="filter">
 	<div class="form-group">
+        
+        <div *ngIf="filter.hasError('route')">
+            Diese Route wird nicht angeboten!
+        </div>
+        
 		<label>Von</label>
 		<input ngControl="von" class="form-control">
 
-		<div *ngIf="!filter.controls.von.valid">
+		<div *ngIf="!filter.controls.von.valid && !filter.controls.von.pending">
 			Fehler!!!
 		</div>
 
@@ -34,6 +39,15 @@
 	<div class="form-group">
 		<label>Nach</label>
 		<input ngControl="nach" class="form-control">
+	</div>
+
+
+	<div class="form-group">
+		<label>Max. Segmente</label>
+		<input ngControl="maxSegmente" class="form-control">
+        <div *ngIf="filter.controls.maxSegmente?.hasError('range')">
+            Dieser Wert muss zwischen zwischen 1 und 5 befinden.
+        </div>
 	</div>
 
 	<div class="form-group">

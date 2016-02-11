@@ -46,7 +46,8 @@ System.register(['angular2/core'], function(exports_1) {
                 };
                 OrtPipe = __decorate([
                     core_1.Pipe({
-                        name: 'ort'
+                        name: 'ort',
+                        pure: true
                     }), 
                     __metadata('design:paramtypes', [])
                 ], OrtPipe);

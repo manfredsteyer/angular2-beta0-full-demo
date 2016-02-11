@@ -56,7 +56,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/src/facade/lang']
                     core_1.Directive({
                         selector: 'input[date]',
                         host: { '(input)': 'input($event.target.value)', '(blur)': 'blur()' },
-                        bindings: [PROVIDER]
+                        providers: [PROVIDER]
                     }), 
                     __metadata('design:paramtypes', [core_1.Renderer, core_1.ElementRef])
                 ], DateValueAccessor);

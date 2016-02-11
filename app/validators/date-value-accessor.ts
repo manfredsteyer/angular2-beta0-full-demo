@@ -10,7 +10,7 @@ const PROVIDER = CONST_EXPR(new Provider(
   selector:
       'input[date]',
   host: {'(input)': 'input($event.target.value)', '(blur)': 'blur()'},
-  bindings: [PROVIDER]
+  providers: [PROVIDER]
 })
 export class DateValueAccessor extends DefaultValueAccessor {
    

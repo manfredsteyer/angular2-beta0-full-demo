@@ -1,27 +1,48 @@
 <h2>Flug suchen!</h2>
   
 
-<form #f="ngForm">
+<form #f="ngForm" route>
+    
+    <div *ngIf="f.form.hasError('route')">
+        Diese Route wird nicht angeboten!
+    </div>
+    
 	<div class="form-group">
 		<label>Von</label>
-		<input [(ngModel)]="von" ngControl="von" ort-async required class="form-control">
+        
+		<input [(ngModel)]="von" name="von" ngControl="von" ort required class="form-control">
 
-		<show-error control="von" [errors]="['required', 'ort']"></show-error>
-        
-        <div *ngIf="f?.controls?.von?.hasError('ortAsync')">
-            Ort wird nicht angeflogen!!!!
-        </div>
-        <div *ngIf="f?.controls?.von?.pending">
-            Pending!!
+        <div *ngIf="f?.controls?.von?.hasError('required')">
+            Pflichtfeld!
         </div>
         
+        <div *ngIf="f?.controls?.von?.hasError('ort')">
+            Ort wird nicht angeflogen!
+        </div>
+        
+
 	</div>
 
 	<div class="form-group">
 		<label>Nach</label>
-		<input [(ngModel)]="nach" ngControl="nach" class="form-control">
+		<input [(ngModel)]="nach" ortAsync name="nach" ngControl="nach" class="form-control">
+        <div *ngIf="f.controls.nach?.hasError('ortAsync')">
+            Ort wird nicht angeflogen!
+        </div>
+        <div *ngIf="f.controls.nach?.pending">
+            Pending!!
+        </div>
+
 	</div>
 
+	<div class="form-group">
+		<label>Max. Segmente</label>
+		<input [(ngModel)]="maxSegmente" ngControl="maxSegmente" class="form-control" min="1" max="5">
+        <div *ngIf="f.controls.maxSegmente?.hasError('range')">
+            Dieser Wert muss zwischen zwischen 1 und 5 befinden.
+        </div>
+	</div>
+    
 	<div class="form-group">
 		<input type="button"
 				class="btn btn-default"
@@ -46,7 +67,7 @@
 		<td>{{f.id}}</td>
 		<td>{{f.datum.substr(0,10) }}</td>
 		<td>{{f.abflugort | ort:'short' }}</td>
-		<td>{{f.zielort | ort:'long'}}</td>
+		<td>{{f.zielort | ort:'short'}}</td>
 		<td>
 			<a href="javascript:void(0)"
 				(click)="selectFlug(f)">Auswählen</a> |
@@ -56,13 +77,13 @@
 	</tr>
 </table>
 
-<!--
+
 <div>
 	<div *ngFor='#f of fluege' class="col-sm-4" >
 		<flug-card
 			[item]="f"
-			[selected]="f == selectedFlug"
-			(itemSelected)="selectedFlug = $event">
+			[selectedItem]="selectedFlug"
+			(selectedItemChange)="selectedFlug = $event">
 
 			<p>
 				{{f.freiePlaetze}} von {{f.plaetze}} Plätzen frei.
@@ -71,4 +92,3 @@
 		</flug-card>
 	</div>
 </div>
--->    
